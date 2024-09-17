@@ -1,0 +1,27 @@
+name: Python APP workflow
+
+on:
+    push:
+        branches: [ main, develop ]
+
+jobs:
+    buid:
+        runs-on: ubuntu-latest
+
+        steps:
+            - 
+                uses: actions/checkout@v3
+            -
+                name: Login to Docker Hub
+                uses: docker/login-action@v3
+                with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}    
+            - 
+              name: Build and push
+              uses: docker/build-push-action@v2
+              with: 
+                    context: .
+                    push: true
+                    tags: lgpepino/generic-images/my-python-app:${{ github.sha }}
+                    file: ./Dockerfile
