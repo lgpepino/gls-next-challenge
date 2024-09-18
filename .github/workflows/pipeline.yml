@@ -36,8 +36,6 @@ jobs:
         steps:
             - 
                 uses: actions/checkout@v4.1.7
-                with:
-                    repository: medyagh/local-dev-example-with-minikube
             - 
                 name: Start minikube
                 uses: medyagh/setup-minikube@latest
