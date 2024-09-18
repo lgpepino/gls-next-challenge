@@ -1,0 +1,7 @@
+replicas:
+  count: 3
+image:
+  repository: lgpepino/generic-images
+  tag: my-python-app-latest
+service:
+  port: 5001

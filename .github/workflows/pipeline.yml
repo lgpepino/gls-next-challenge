@@ -24,9 +24,12 @@ jobs:
               with: 
                     context: .
                     push: true
-                    tags: lgpepino/generic-images:my-python-app-${{ github.sha }}
+                    #The below line will be used when HELM releases is in place to deploy the images with the tag of the commit SHA
+                    #tags: lgpepino/generic-images:my-python-app-${{ github.sha }}
+                    tags: lgpepino/generic-images:my-python-app-latest
                     file: ./Dockerfile
     deploy:
+        needs: build 
         runs-on: ubuntu-latest
         name: Deploy the application to Cloud Minikube
 
@@ -44,10 +47,6 @@ jobs:
             - 
                 name: Deploy to minikube
                 run:
-                  curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-                  sudo apt-get install apt-transport-https --yes
-                  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-                  sudo apt-get update
-                  sudo apt-get install helm  
-                  helm upgrade -i --namespace dev --create-namespace python-app ./python-app -f python-app/values.yaml
-                  kubectl wait --for=condition=ready pod -l app=python-app
+                    kubectl create namespace dev
+                    kubectl apply -f kubernetes-manifests/python-app.yaml --namespace dev
+                    kubectl wait --for=condition=ready pod -l app=python-app --namespace dev
