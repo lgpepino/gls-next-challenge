@@ -48,3 +48,10 @@ jobs:
                     kubectl create namespace dev &&
                     kubectl apply -f kubernetes-manifests/python-app.yaml --namespace dev &&
                     kubectl wait --for=condition=ready pod -l app=python-app --namespace dev
+            - 
+                name: Test service URLs
+                run: |
+                    minikube service list
+                    minikube service python-app --url --namespace dev
+                    echo "------------------Testing the service------------------"
+                    curl $(minikube service python-app --url  --namespace dev)   
