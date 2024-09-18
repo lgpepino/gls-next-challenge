@@ -46,7 +46,7 @@ jobs:
                 run: kubectl get pods -A
             - 
                 name: Deploy to minikube
-                run:
-                    kubectl create namespace dev
-                    kubectl apply -f kubernetes-manifests/python-app.yaml --namespace dev
+                run: 
+                    kubectl create namespace dev &&
+                    kubectl apply -f kubernetes-manifests/python-app.yaml --namespace dev &&
                     kubectl wait --for=condition=ready pod -l app=python-app --namespace dev
