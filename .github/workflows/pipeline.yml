@@ -53,5 +53,8 @@ jobs:
                 run: |
                     minikube service list
                     minikube service python-app --url --namespace dev
-                    echo "------------------Testing the service------------------"
-                    curl $(minikube service python-app --url  --namespace dev)   
+            -
+                name: Check if application is running
+                run: |
+                    check=$(kubectl get pods --namespace dev | awk '{ print $3 }' | grep -i Running | wc -l)
+                    if [[ "$check" -eq 3 ]]; then echo "APP is healty"; else exit 1"; fi
