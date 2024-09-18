@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/status')
+@app.route('/')
 def get_status():
         return f'Hello Word, the app is Running'
 
