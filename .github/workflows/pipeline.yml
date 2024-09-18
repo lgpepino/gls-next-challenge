@@ -57,4 +57,4 @@ jobs:
                 name: Check if application is running
                 run: |
                     check=$(kubectl get pods --namespace dev | awk '{ print $3 }' | grep -i Running | wc -l)
-                    if [[ "$check" -eq 3 ]]; then echo "APP is healty"; else exit 1"; fi
+                    if [[ "$check" -eq 3 ]]; then echo "APP is healty"; else exit 1; fi
