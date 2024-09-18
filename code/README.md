@@ -6,8 +6,8 @@ The addiotional pre-requisites will be installed when we will run the applicatio
 
 | Library | How to install |
 |---------|----------------| 
-| Flask   | [here](https://github.com/lgpepino/gls-next-challenge/blob/develop/code/README.md#L44)               |
-| requirements.txt | [here](https://github.com/lgpepino/gls-next-challenge/blob/develop/code/README.md#L45)      |
+| Flask   | [here](https://github.com/lgpepino/gls-next-challenge/blob/develop/code/README.md?plain=1#L44)               |
+| requirements.txt | [here](https://github.com/lgpepino/gls-next-challenge/blob/develop/code/README.md?plain=1#L45)      |
 
 ### How to create/update requirements.txt
 
