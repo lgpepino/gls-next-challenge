@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  selector:
+    matchLabels:
+      app: python-app
+  replicas:  {{ .Values.replicas.count }}
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources:
+          limits:
+             cpu: 50m
+             memory: 100Mi
+          requests:
+             cpu: 25m
+             memory: 10Mi
+        ports:
+        - containerPort: {{ .Values.service.port }}
