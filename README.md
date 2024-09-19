@@ -124,3 +124,12 @@ To solve the deployment limitations and provide a proper monitoring, the landsca
     - For resource alerts, I'll create a datasource to connect to Prometheus and create the dashboards to monitor the app.
     - For logs, I'll created a datasource to connect to ElasticSearch and create a query count the number of the errors, when this count exceed a number, an alert will be started.
     - Those alerts will be send by email and the internal communication tool, and for critical error to the phones of responsibles from the application.
+
+### Secutiry
+
+In this solution, some security checks are in place to avoid expose secrets in the code, and search for vulnerabilities in the image built to run the application.
+    
+   - The security options provided by github are enable for this repository: https://docs.github.com/en/code-security
+
+   - An integration with [Snyk](https://snyk.io/) we created to perform more checks in the code and in the Dockerfile.
+

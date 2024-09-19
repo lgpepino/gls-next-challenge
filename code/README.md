@@ -66,4 +66,4 @@ docker build -t local_container_python .
 ```bash
 docker run -p 5001:5001 local_container_python
 ```
-Access http://127.0.0.1:5001/ to get the Hello Word endpoint message
+Access http://127.0.0.1:5001/ to get the Hello World endpoint message
