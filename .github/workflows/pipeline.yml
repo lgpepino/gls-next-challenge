@@ -65,6 +65,7 @@ jobs:
                 run: |
                     minikube service list
                     minikube service python-app --url --namespace dev
+                    kubectl get ingress --namespace dev
             -   
                 #This step perform a check, to ensure the application is running
                 #In the first line the code collect how many lines we have with pods in the running state
