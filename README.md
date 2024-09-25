@@ -80,10 +80,35 @@ kubernetes-dashboard   Active   119d
 kubectl create namespace dev
 ```
 
-- We can deploy the application now:
+- We can deploy the application now using kubectl:
 ```bash
 kubectl apply -f kubernetes-manifests/python-app.yaml --namespace dev
 ```
+
+- Or we can deploy using HELM:
+```bash
+
+    helm upgrade -i --namespace dev --create-namespace python-app ./helm-python-app -f helm-python-app/values.yaml
+```
+
+- To access the application from your local minikube, an additional steps need to be perfomed to enable the traffic to the application.
+```bash
+    minikube addons enable ingress
+    minikube tunnel
+    curl --resolve "python-app-status.com:80:127.0.0.1" -i http://python-app-status.com
+```
+
+- You should get this message:
+```bash
+    HTTP/1.1 200 OK
+    Date: Wed, 25 Sep 2024 16:44:59 GMT
+    Content-Type: text/html; charset=utf-8
+    Content-Length: 31
+    Connection: keep-alive
+
+    Hello World, the app is Running
+```
+
 
 #### Solving limitations and Implementing Monitoring
 

@@ -55,11 +55,12 @@ jobs:
                 #Since it's a temporary cluster, the namespace need to be created
                 #Using kuctlapply we deploy the manifest to create the application and the service in the dev namespace
                 #The kubectl wait will release the terminal when the condintion is achieved
-                name: Deploy to minikube
-                run: 
-                    kubectl create namespace dev &&
-                    kubectl apply -f kubernetes-manifests/python-app.yaml --namespace dev &&
-                    kubectl wait --for=condition=ready pod -l app=python-app --namespace dev
+                name: Install HELM and Deploy the app
+                run: | 
+                    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+                    chmod 700 get_helm.sh
+                    ./get_helm.sh
+                    
             - 
                 #Checking if the service from python app where created in cluster
                 name: Test service URLs
