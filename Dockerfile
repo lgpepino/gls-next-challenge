@@ -1,19 +1,25 @@
 
-# Use uma imagem base do Python
-FROM python:3.9-slim-buster
+FROM python:3.9-alpine3.20 as builder
 
-# Copiar o arquivo da aplicação para o contêiner
-COPY code/app.py /app/
-
-# Definir o diretório de trabalho
 WORKDIR /app
 
-# Instalar as dependências
 COPY code/requirements.txt requirements.txt
-RUN pip install flask && pip install -r requirements.txt
 
-# Expor a porta 5000
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir --upgrade -r requirements.txt && pip install flask
+
+COPY code/app.py .
+RUN rm requirements.txt
+
+FROM builder
+
+WORKDIR /app
+
+COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+
+COPY --from=builder /app/* .
+
 EXPOSE 5001
 
-# Comando para iniciar a aplicação
+
 CMD ["python", "app.py"]

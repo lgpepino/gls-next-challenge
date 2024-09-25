@@ -150,6 +150,9 @@ To solve the deployment limitations and provide a proper monitoring, the landsca
     - For logs, I'll created a datasource to connect to ElasticSearch and create a query count the number of the errors, when this count exceed a number, an alert will be started.
     - Those alerts will be send by email and the internal communication tool, and for critical error to the phones of responsibles from the application.
 
+- For tracing the application traffic, I'll install [opentelemetry](https://opentelemetry.io/docs/demo/kubernetes-deployment/) to find the bottlenecks of the application:
+
+
 ### Secutiry
 
 In this solution, some security checks are in place to avoid expose secrets in the code, and search for vulnerabilities in the image built to run the application.
