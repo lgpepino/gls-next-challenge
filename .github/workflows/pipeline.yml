@@ -55,11 +55,9 @@ jobs:
                 #Since it's a temporary cluster, the namespace need to be created
                 #Using kuctlapply we deploy the manifest to create the application and the service in the dev namespace
                 #The kubectl wait will release the terminal when the condintion is achieved
-                name: Install HELM and Deploy the app
+                name: Deploy the app
                 run: | 
-                    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-                    chmod 700 get_helm.sh
-                    ./get_helm.sh
+                    helm upgrade -i --namespace dev --create-namespace python-app ./helm-python-app -f helm-python-app/values.yaml
                     
             - 
                 #Checking if the service from python app where created in cluster
